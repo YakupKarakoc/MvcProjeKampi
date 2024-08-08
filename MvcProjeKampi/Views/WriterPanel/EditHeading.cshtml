@@ -1,0 +1,31 @@
+﻿@model EntityLayer.Concreate.Heading
+@{
+    ViewBag.Title = "EditHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h2>Başlıkları Güncelleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("EditHeading", "WriterPanel", FormMethod.Post))
+{
+<table class="form-group">
+    @*gizli giriş öğesidir kullanıcı tarafından görünmez ve değiştirilemez.(HiddenFor)*@
+    @Html.HiddenFor(x => x.HeadingID)
+    @Html.HiddenFor(x => x.WriterID)
+    @Html.HiddenFor(x => x.HeadingDate)
+
+    @Html.Label("Başlık Adı:")
+    @Html.TextBoxFor(x => x.HeadingName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Kategori Adı:")
+    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
+
+    <br />
+
+    <button class="btn btn-info">Başlıkları güncelle</button>
+</table>
+}
+
+
+

@@ -1,0 +1,41 @@
+﻿@model EntityLayer.Concreate.Category
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<h1>YENİ KATEGORİ EKLEME SAYFASI</h1>
+<br />
+@using (Html.BeginForm("AddCategory", "AdminCategory", FormMethod.Post, new { id = "categoryForm" }))
+{
+    <div class="form-group">
+        @Html.Label("Kategori Adı")
+        @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CategoryName)
+        <br />
+        <br />
+        @Html.Label("Açıklamayı yazınız")
+        @Html.TextAreaFor(x => x.CategoryDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CategoryDescription)
+        <br />
+        <br />
+        <button type="button" id="btn1" class="btn btn-info">Kaydet</button>
+    </div>
+}
+<script>
+    $('#btn1').click(function (e) {
+        e.preventDefault(); // Butonun default davranışını engeller
+
+        swal({
+            title: "Kategori Eklendi",
+            text: "Kategori başarılı bir şekilde eklenmiştir.",
+            icon: "success",
+            button: "Tamam"
+        }).then(function () {
+            // SweetAlert'ten sonra formu submit eder
+            $('#categoryForm').submit();
+        });
+    });
+</script>
